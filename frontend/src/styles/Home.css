@@ -1,0 +1,322 @@
+@import url(https://fonts.bunny.net/css?family=bai-jamjuree:300,600,700);
+@import url('https://fonts.googleapis.com/css?family=Nova+Mono&display=swap');
+
+:root {
+	--bg-clr: #f0f8ff;
+	--txt-clr: #00b4d8;
+    --machine-white: #e3f2fd;
+    --machine-feature-gray: #A3A1A1;
+    --accent-green: #00b4d8;
+    --darkest-gray: #636161;
+}
+.home-container{
+    display: flex;
+}
+.text-body {
+	font-family: system-ui;
+	min-height: 100svh;
+	display: grid;
+	place-content: center;
+	background-color: var(--bg-clr);
+}
+
+.layered-text {
+	--txt-cta: rgb(2, 132, 199);
+	position: absolute;
+	inset: 0;
+	margin: auto;
+	display: grid;
+	place-content: center;
+	overflow: hidden;
+	height: auto;
+}
+
+.layered-text p {
+	color: var(--txt-clr);
+	font-family: "Bai Jamjuree", sans-serif;
+	font-size: 1.5rem;
+	font-weight: 500;
+	line-height: 0.75;
+    position: relative;
+    left: -80%;
+    top: -180%;
+}
+
+.layered-text p:first-child {
+	text-indent: 35px;
+	margin-bottom: -1px;
+}
+
+.layered-text p.shadow {
+	text-transform: uppercase;
+	font-size: 4.5rem; /* Decreased font size */
+	position: relative;
+	perspective: 100px;
+	font-weight: 600;
+	color: var(--txt-cta);
+	left: -80%; /* Move the text to the left */
+    top: -50%;
+}
+
+.layered-text p.shadow::before {
+	content: "Spin n Shine";
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	scale: 1 -1;
+	opacity: 0.25;
+	color: var(--txt-clr);
+	z-index: -1;
+	transform: rotateX(-40deg) scaleX(123%); /* magic numbers */
+}
+
+.layered-text p.shadow::after {
+	content: "";
+	position: absolute;
+	top: 100%;
+	left: -50%;
+	width: 200%;
+	height: 150%;
+	background: linear-gradient(to bottom, transparent, var(--bg-clr) 85%);
+}
+
+/* Mobile View */
+@media (max-width: 1176px) {
+    .layered-text p {
+        left: 3vh; /* Ensure the text is visible */
+        top: -20vh;  /* Adjust positioning using viewport height */
+        font-size: 2rem; /* Adjust font size for mobile */
+    }
+
+    .layered-text p.shadow {
+        font-size: 3rem; /* Smaller font size for mobile */
+        left: 0;
+        top: -18vh; /* Adjust shadow position with a smaller value */
+    }
+}
+
+@media (max-width: 768px) {
+    .layered-text p {
+        left: 0; /* Ensure the text is visible */
+        top: -20vh;  /* Adjust positioning for smaller screens */
+        font-size: 1.2rem; /* Further reduce font size for smaller mobile screens */
+    }
+
+    .layered-text p.shadow {
+        font-size: 2rem; /* Smaller font size for mobile */
+        left: -1vh;
+        top: -18vh; /* Move the shadow upwards with a smaller value */
+    }
+}
+
+.box-canvas{
+    position: relative;
+    margin: auto;
+    display: block;
+    margin-top: 8%;
+    margin-bottom: 8%;
+    width: 600px;
+    height:600px;
+    justify-content: flex-end;
+
+  }
+  
+  /* Main machine body */
+/* Main machine body */
+.machine {
+    position: absolute;
+    left: 550px; /* Increased value to move it to the right */
+    top: -5vh;
+    width: 300px;
+    height: 400px;
+    background: var(--machine-white);
+    border-radius: 5%;
+}
+
+  
+  /* Powder drawer */
+  .drawer {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 100px;
+    height: 50px;
+    border: 2px solid var(--machine-feature-gray);
+    border-radius: 0 0 20% 0;
+  }
+  
+  /* Drawer handle */
+  .drawer::after {
+    content: '';
+    position: absolute;
+    width: 70px;
+    height: 15px;
+    background: var(--machine-feature-gray);
+    bottom: 5px;
+    right: 5px;
+    border-radius: 0 0 30% 0;
+  }
+  
+  /* Small LED display */
+  .panel {
+    position: absolute;
+    width: 40px;
+    height: 15px;
+    background: var(--darkest-gray);
+    left: 150px;
+    top: 30px;
+  }
+  
+  /* Light indicator in panel */
+  .panel::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 10px;
+    background: var(--accent-green);
+    right: 5px;
+    top: 2px;
+  }
+  
+  /* Machine dial */
+  .panel::after {
+    content: '';
+    position: absolute;
+    left: 80px;
+    top: -10px;
+    width: 35px;
+    height: 35px;
+    border: 2px solid var(--machine-feature-gray);
+    border-radius: 50%;
+  }
+  
+  /* Center of washer door, width border forming the frame */
+  .door {
+    position: absolute;
+    background: var(--machine-white);
+    left: 60px;
+    bottom: 90px;
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    border: 5px solid var(--machine-feature-gray);
+    overflow: hidden;
+  }
+  
+  /* Reflection on door surface */
+  .door::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 160px;
+    height: 160px;
+    background: radial-gradient(transparent 30%, white);
+  }
+  
+  /* Washing machine drum */
+  .drum {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--darkest-gray);
+    overflow: hidden;
+    animation: drumRotate 2s infinite;
+  }
+  
+  /* Clothes inside machine */
+  .drum::before {
+    content: '';
+    position: absolute;
+    width: 80px;
+    height: 50px;
+    background: var(--accent-green);
+    border-radius: 40%;
+    bottom: 0;
+  }
+  
+  
+  
+  @keyframes drumRotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @media (max-width: 1176px){
+    .box-canvas{
+        display: none;
+    }
+  }
+
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .swiper {
+    width: 100%;
+    height: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .mySwiper2 {
+    height: 80%;
+    width: 100%;
+  }
+  
+  .mySwiper {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+  
+  .mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+  }
+  
+  .mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  

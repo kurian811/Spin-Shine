@@ -1,0 +1,139 @@
+/* Root Variables */
+:root {
+    --primary-color: #4dbeff;
+    --secondary-color: #003366;
+    --text-color: #333;
+    --background-color: #f0f8ff;
+    --button-color: #00b4d8;
+    --button-hover: #0077b6;
+}
+
+
+/* Contact Container */
+.contact-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background: transparent;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header Section */
+.contact-header {
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.contact-header h1 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+}
+
+.contact-header p {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Contact Content */
+.contact-content {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+/* Contact Form */
+.contact-form {
+    flex: 1;
+    max-width: 500px;
+}
+
+.contact-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.contact-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contact-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: none;
+}
+
+.contact-form .btn-submit {
+    padding: 0.8rem 1.5rem;
+    background-color: var(--button-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.contact-form .btn-submit:hover {
+    background-color: var(--button-hover);
+}
+
+/* Contact Info */
+.contact-info {
+    flex: 1;
+    max-width: 500px;
+}
+
+.contact-info h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.contact-info p {
+    margin: 0.5rem 0;
+}
+
+.contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contact-content {
+        flex-direction: column;
+    }
+}
+/* Add this to your Contact.css */
+.status-message {
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  
+  .status-message {
+    color: #28a745; /* Green for success */
+  }
+  
+  .status-message.error {
+    color: #dc3545; /* Red for errors */
+  }
+  

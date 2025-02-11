@@ -1,0 +1,312 @@
+.laundry-form-container {
+  width: 90%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: transparent;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.laundry-form-heading {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.laundry-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.laundry-label {
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #555;
+}
+
+.readonly-field {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #e9ecef;
+  color: #495057;
+  cursor: not-allowed;
+}
+
+.clothes-section {
+  margin: 20px 0;
+}
+
+.clothes-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.laundry-btn {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.laundry-btn:hover {
+  background-color: #0056b3;
+}
+
+.laundry-error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.laundry-submit-btn {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: center;
+}
+
+.laundry-submit-btn:hover {
+  background-color: #218838;
+}
+.clothes-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.clothes-item .clothes-item-span1 {
+  width: 80px; /* Fixed width for consistent spacing */
+  text-align: left; /* Center the number within the span */
+  font-weight: bold;
+
+}
+.clothes-item .clothes-item-span2{
+  width: 80px; /* Fixed width for consistent spacing */
+  text-align: center; /* Center the number within the span */
+  font-weight: bold;
+}
+
+.laundry-btn {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.laundry-btn:hover {
+  background-color: #0056b3;
+}
+
+.clothes-item button:first-child {
+  margin-right: 10px; /* Add space between the '-' button and the count */
+}
+
+.clothes-item button:last-child {
+  margin-left: 10px; /* Add space between the '+' button and the count */
+}
+.center-buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  height: 90vh; /* Ensure the buttons are vertically centered */
+}
+
+.center-button {
+  padding: 40px 40px;
+  font-size: 16px;
+  border: 2px solid #3498db;
+  border-radius: 5px;
+  background-color: #3498db;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+}
+
+.center-button:hover {
+  transform: scale(1.1); /* Zoom effect */
+  background-color: #2980b9; /* Change background on hover */
+}
+
+.center-button:active {
+  transform: scale(
+    1
+  ); /* Optional: Remove zoom effect when the button is clicked */
+}
+.laundry-status-page {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+  padding: 30px; /* Increased padding for better spacing */
+  border-radius: 10px;
+  background-color: transparent;
+  max-width: 800px; /* Increased width for more space */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90vh;
+}
+
+.laundry-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 30px; /* More space between title and form */
+  font-size: 24px; /* Larger font size */
+}
+
+.laundry-info {
+  margin-bottom: 20px;
+}
+
+.laundry-items-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.laundry-item {
+  background: #ecf0f1;
+  margin: 10px 0; /* Added space between items */
+  padding: 15px; /* Increased padding for better readability */
+  border-radius: 8px; /* Rounded corners */
+  font-size: 16px; /* Larger font for better readability */
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* More space between buttons */
+}
+
+.status-button {
+  padding: 12px 20px; /* Increased padding for larger buttons */
+  font-size: 16px; /* Larger font size */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.status-button:hover {
+  transform: scale(1.05);
+}
+
+.edit-button {
+  background-color: #3498db;
+  color: #fff;
+}
+
+.delete-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+.form-group {
+  margin-bottom: 20px; /* More space between form groups */
+}
+
+.form-button {
+  margin: 10px;
+  padding: 12px 18px; /* Larger padding for better button size */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.save-button {
+  background-color: #2ecc71;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.laundry-error {
+  color: #e74c3c;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 15px; /* Added space below the error message */
+}
+
+.laundry-loading {
+  text-align: center;
+  font-size: 16px;
+  color: #7f8c8d;
+}
+
+.laundry-edit-form {
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px; /* More rounded corners */
+  background-color: transparent;
+}
+
+.laundry-edit-form .form-group {
+  margin-bottom: 20px; /* More space between form fields */
+}
+
+.laundry-edit-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.laundry-edit-form input[type="number"] {
+  width: 100%;
+  padding: 12px; /* Larger input field */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+.laundry-edit-form input[type="number"]:focus {
+  border-color: #007bff;
+}
+
+.form-button.save-button {
+  background-color: #007bff;
+  color: white;
+}
+
+.form-button.save-button:hover {
+  background-color: #0056b3;
+}
+
+.form-button.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.form-button.cancel-button:hover {
+  background-color: #a71d2a;
+}

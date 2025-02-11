@@ -1,0 +1,299 @@
+/* Root variables */
+:root {
+  --primary-color: #4dbeff;
+  --secondary-color: #003366;
+  --text-color: #00b4d8;
+  --background-color: #f0f8ff;
+}
+
+/* Navbar container */
+.navbar-container {
+  /* font-family: "Poppins", sans-serif; */
+  background-color: var(--background-color);
+  padding: 0 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column; /* Default for mobile view */
+  justify-content: space-between;
+  position: relative;
+  z-index: 10;
+  transition: all 0.3s ease-in-out; /* Smooth transition */
+}
+
+/* Navbar container when menu is open */
+.navbar-container.menu-open {
+  padding-bottom: 1rem; /* Add spacing for expanded menu */
+}
+
+/* Navbar header (logo and menu toggle) */
+.navbar-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-logo {
+  width: 85px;
+  height: auto;
+  margin-left: 50px;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  font-size: 2.2rem;
+  color: var(--text-color);
+  cursor: pointer;
+  display: none;
+}
+
+/* Navigation menu */
+.nav-menu {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  gap: 12px;
+  justify-content: flex-start; /* Align items to the left */
+}
+
+.nav-menu ul li {
+  margin: 0 1rem;
+}
+
+.nav-menu ul li .nav-links {
+  text-decoration: none;
+  font-size: 17px;
+
+  color: var(--text-color);
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease-in-out;
+}
+
+.nav-menu ul li .nav-links::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-color);
+  transition: width 0.3s ease-in-out;
+}
+
+.nav-menu ul li .nav-links:hover {
+  color: var(--primary-color);
+}
+
+.nav-menu ul li .nav-links:hover::after {
+  width: 100%;
+}
+
+.nav-menu ul li .nav-links.active {
+  color: var(--primary-color);
+}
+
+.nav-menu ul li .nav-links.active::after {
+  width: 100%;
+}
+
+/* Icons */
+.navbar-icons {
+  display: flex;
+  gap: 1rem;
+  margin-left: 15px;
+}
+
+.navbar-icons i {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  transition: color 0.3s ease-in-out;
+}
+
+.navbar-icons i:hover {
+  color: var(--primary-color);
+}
+
+/* Responsive adjustments for mobile view */
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  .nav-logo {
+    width: 70px;
+    height: auto;
+    margin-left: 0;
+  }
+
+  .nav-menu.active {
+    max-height: 500px; /* Adjust height to fit expanded menu */
+  }
+
+  .nav-menu ul {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-menu ul li {
+    margin: 0.5rem 0;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .navbar-icons {
+    margin-right: 20px;
+  }
+
+  /* Adjust layout when menu is open */
+  .navbar-container.menu-open + .content {
+    margin-top: 200px; /* Push content down based on menu height */
+  }
+}
+
+/* Responsive adjustments for desktop view */
+@media (min-width: 769px) {
+  .navbar-container {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-menu {
+    flex-direction: row;
+    max-height: none;
+  }
+
+  .nav-menu ul {
+    flex-direction: row;
+  }
+
+  .nav-menu ul li {
+    margin: 0 1rem;
+  }
+
+  /* Ensure content stays in place when menu is open */
+  .navbar-container.menu-open + .content {
+    margin-top: 0;
+  }
+}
+.notification-bell {
+  position: relative;
+  cursor: pointer;
+}
+
+.notification-dot {
+  position: absolute;
+  top: -6px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  background-color: red;
+  border-radius: 50%;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+  position: absolute;
+  top: 30px;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  min-width: 250px;
+  max-height: 400px;
+  overflow-y: auto;
+  z-index: 1000;
+  align-items: flex-start;
+  font-family: Arial, sans-serif;
+  gap: 10px; /* Space between items */
+  display: flex;
+  flex-direction: column;
+}
+.notification-class{
+  display: flex;
+  flex-direction: column;
+}
+/* Notification item styling */
+.notification-item {
+  padding: 12px 15px;
+  border-right: 1px solid #f0f0f0; /* Adjusted to create space between items in row */
+  font-size: 14px;
+  line-height: 1.6;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  width: auto;
+}
+
+.notification-item:hover {
+  background-color: #f1f1f1;
+  color: #007bff;
+}
+
+.notification-item.read {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+
+.notification-item.unread {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+.notification-item small {
+  margin-top: 5px;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+/* Styling for the dropdown action button */
+.dropdown-action-button {
+  background-color: #007bff; /* Blue background */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dropdown-action-button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+  transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+.dropdown-action-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5); /* Add focus outline */
+}
+
+.dropdown-action-button:disabled {
+  background-color: #d6d6d6; /* Disabled button color */
+  cursor: not-allowed;
+}

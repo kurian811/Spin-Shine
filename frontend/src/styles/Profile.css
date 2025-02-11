@@ -1,0 +1,111 @@
+/* General profile container styles */
+.profile-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: transparent;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-heading {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Profile information section */
+.profile-info p {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+.edit-btn, .change-password-btn, .save-btn, .cancel-btn, .logout-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.edit-btn, .change-password-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  margin-right: 10px;
+}
+
+.save-btn {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+}
+
+.cancel-btn {
+  background-color: #f44336;
+  color: white;
+  border: none;
+}
+
+.logout-btn {
+  background-color: #333;
+  color: white;
+  border: none;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.edit-btn:hover, .change-password-btn:hover, .save-btn:hover, .cancel-btn:hover, .logout-btn:hover {
+  opacity: 0.8;
+}
+
+/* Edit form styling */
+.edit-form, .password-form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form label, .password-form label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.input-field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  color: #333;
+}
+
+.input-field:focus {
+  border-color: #007BFF;
+  outline: none;
+}
+
+/* Error message styling */
+.error-message {
+  color: #f44336;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+/* Button styles for better appearance */
+button:focus {
+  outline: none;
+}
+
+button {
+  transition: background-color 0.3s ease;
+}
+
