@@ -148,6 +148,85 @@ const getDashboardData = async (req, res) => {
   }
 };
 
+const getWeeklyStats = async (req, res) => {
+  try {
+    const weeklyStats = await Laundry.aggregate([
+      {
+        $group: {
+          _id: { $week: "$submissionDate" }, // Get the week number
+          submissions: { $sum: 1 },
+          completed: { $sum: { $cond: [{ $eq: ["$status", "Completed"] }, 1, 0] } },
+          pending: { $sum: { $cond: [{ $eq: ["$status", "Pending"] }, 1, 0] } },
+        },
+      },
+      { $sort: { "_id": 1 } },
+      {
+        $project: {
+          _id: 0, 
+          period: { $concat: ["Week ", { $toString: "$_id" }] }, // Format "Week 1", "Week 2"
+          submissions: 1,
+          completed: 1,
+          pending: 1
+        }
+      }
+    ]);
+
+    console.log("Weekly Stats:", weeklyStats); // Debugging log
+    res.json(weeklyStats || []); // Ensure an array is always returned
+  } catch (error) {
+    console.error("Error fetching weekly stats:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const getMonthlyStats = async (req, res) => {
+  try {
+    const monthlyStats = await Laundry.aggregate([
+      {
+        $group: {
+          _id: { $month: "$submissionDate" }, // Get the month number
+          submissions: { $sum: 1 },
+          completed: { $sum: { $cond: [{ $eq: ["$status", "Completed"] }, 1, 0] } },
+          pending: { $sum: { $cond: [{ $eq: ["$status", "Pending"] }, 1, 0] } },
+        },
+      },
+      { $sort: { "_id": 1 } },
+      {
+        $project: {
+          _id: 0,
+          period: { 
+            $switch: { // Convert numbers to month names
+              branches: [
+                { case: { $eq: ["$_id", 1] }, then: "January" },
+                { case: { $eq: ["$_id", 2] }, then: "February" },
+                { case: { $eq: ["$_id", 3] }, then: "March" },
+                { case: { $eq: ["$_id", 4] }, then: "April" },
+                { case: { $eq: ["$_id", 5] }, then: "May" },
+                { case: { $eq: ["$_id", 6] }, then: "June" },
+                { case: { $eq: ["$_id", 7] }, then: "July" },
+                { case: { $eq: ["$_id", 8] }, then: "August" },
+                { case: { $eq: ["$_id", 9] }, then: "September" },
+                { case: { $eq: ["$_id", 10] }, then: "October" },
+                { case: { $eq: ["$_id", 11] }, then: "November" },
+                { case: { $eq: ["$_id", 12] }, then: "December" },
+              ],
+              default: "Unknown"
+            }
+          },
+          submissions: 1,
+          completed: 1,
+          pending: 1
+        }
+      }
+    ]);
+
+    console.log("Monthly Stats:", monthlyStats); // Debugging log
+    res.json(monthlyStats || []);
+  } catch (error) {
+    console.error("Error fetching monthly stats:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
 
 
 module.exports = {
@@ -158,4 +237,6 @@ module.exports = {
   updateLaundryStatus,
   deleteLaundrySubmission,
   getDashboardData,
+  getWeeklyStats, 
+  getMonthlyStats,
 };

@@ -8,6 +8,8 @@ const {
   updateLaundryStatus, 
   deleteLaundrySubmission ,
   getDashboardData ,
+  getWeeklyStats,
+  getMonthlyStats,
 } = require("../controllers/adminController");
 
 // Route to fetch all users
@@ -29,6 +31,12 @@ router.put("/laundry/submissions/:submissionId", updateLaundryStatus);
 router.delete("/laundry/submissions/:submissionId", deleteLaundrySubmission);
 
 router.get("/dashboard", getDashboardData);
+
+router.get("/dashboard/weekly",getWeeklyStats);
+
+router.get("/dashboard/monthly", getMonthlyStats);
+
+
 
 
 // Export the router to use in the main app

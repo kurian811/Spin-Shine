@@ -760,3 +760,44 @@ body {
   margin-bottom: 20px;
   font-size: 24px;
 }
+/* Graph Styles */
+.admin-submissions-graph {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.graph-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.graph-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f3f4f6;
+  color: #4b5563;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.graph-button.active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.graph-container {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+}
+
+.metric-icon {
+  font-size: 1.5rem;
+  color: #4b5563;
+  margin-bottom: 8px;
+}

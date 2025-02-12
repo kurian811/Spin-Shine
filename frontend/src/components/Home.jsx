@@ -11,20 +11,20 @@ const Home = () => {
       <div className="home-container">
         {/* Floating Bubbles */}
         <div className="bubbles">
-          {[...Array(10)].map((_, i) => (
+          {[...Array(15)].map((_, i) => (
             <span key={i} className="bubble"></span>
           ))}
         </div>
 
-        {/* Text with Glow Effect */}
+        {/* Text with Glow and Wave Effect */}
         <div className="text-body">
           <div className="layered-text">
             <p className="glow">Welcome to</p>
-            <p className="shadow">Spin n Shine</p>
+            <p className="shadow wave">Spin n Shine</p>
           </div>
         </div>
 
-        {/* Washing Machine with Floating Animation */}
+        {/* Washing Machine with Floating and Rotating Animation */}
         <div className="box-canvas">
           <div className="machine floating">
             <div className="drawer"></div>
@@ -35,19 +35,18 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div class="bubble-container">
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-    <div class="bubble"></div>
-</div>
 
+      {/* Additional Floating Bubbles */}
+      <div className="bubble-container">
+        {[...Array(5)].map((_, i) => (
+          <div key={i} className="bubble"></div>
+        ))}
+      </div>
 
       {/* Calendar and Information Section with Waves */}
       <div className="calendar-container">
         <div className="calendar-section">
-          <Calendar onChange={setDate} value={date} />
+          <Calendar onChange={setDate} value={date} className="animated-calendar" />
         </div>
         <div className="calendar-info">
           <h2 className="wave-text">Make Laundry Effortless!</h2>
