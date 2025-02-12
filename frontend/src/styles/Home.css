@@ -1,322 +1,444 @@
 @import url(https://fonts.bunny.net/css?family=bai-jamjuree:300,600,700);
-@import url('https://fonts.googleapis.com/css?family=Nova+Mono&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Nova+Mono&display=swap");
 
 :root {
-	--bg-clr: #f0f8ff;
-	--txt-clr: #00b4d8;
-    --machine-white: #e3f2fd;
-    --machine-feature-gray: #A3A1A1;
-    --accent-green: #00b4d8;
-    --darkest-gray: #636161;
+  --bg-clr: #f0f8ff;
+  --txt-clr: #00b4d8;
+  --machine-white: #e3f2fd;
+  --machine-feature-gray: #a3a1a1;
+  --accent-green: #00b4d8;
+  --darkest-gray: #636161;
+  --bubble-color: rgba(0, 180, 216, 0.3);
 }
-.home-container{
-    display: flex;
+.home-container {
+  display: flex;
 }
+
 .text-body {
-	font-family: system-ui;
-	min-height: 100svh;
-	display: grid;
-	place-content: center;
-	background-color: var(--bg-clr);
+  font-family: system-ui;
+  min-height: 100svh;
+  display: grid;
+  place-content: center;
+  background-color: var(--bg-clr);
 }
 
 .layered-text {
-	--txt-cta: rgb(2, 132, 199);
-	position: absolute;
-	inset: 0;
-	margin: auto;
-	display: grid;
-	place-content: center;
-	overflow: hidden;
-	height: auto;
+  --txt-cta: rgb(2, 132, 199);
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: grid;
+  place-content: center;
+  overflow: hidden;
+  height: auto;
 }
 
 .layered-text p {
-	color: var(--txt-clr);
-	font-family: "Bai Jamjuree", sans-serif;
-	font-size: 1.5rem;
-	font-weight: 500;
-	line-height: 0.75;
-    position: relative;
-    left: -80%;
-    top: -180%;
+  color: var(--txt-clr);
+  font-family: "Bai Jamjuree", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 0.75;
+  position: relative;
+  left: -80%;
+  top: -180%;
 }
 
 .layered-text p:first-child {
-	text-indent: 35px;
-	margin-bottom: -1px;
+  text-indent: 35px;
+  margin-bottom: -1px;
 }
 
 .layered-text p.shadow {
-	text-transform: uppercase;
-	font-size: 4.5rem; /* Decreased font size */
-	position: relative;
-	perspective: 100px;
-	font-weight: 600;
-	color: var(--txt-cta);
-	left: -80%; /* Move the text to the left */
-    top: -50%;
+  text-transform: uppercase;
+  font-size: 4.5rem; /* Decreased font size */
+  position: relative;
+  perspective: 100px;
+  font-weight: 600;
+  color: var(--txt-cta);
+  left: -80%; /* Move the text to the left */
+  top: -50%;
 }
 
 .layered-text p.shadow::before {
-	content: "Spin n Shine";
-	position: absolute;
-	top: 100%;
-	left: 0;
-	right: 0;
-	scale: 1 -1;
-	opacity: 0.25;
-	color: var(--txt-clr);
-	z-index: -1;
-	transform: rotateX(-40deg) scaleX(123%); /* magic numbers */
+  content: "Spin n Shine";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  scale: 1 -1;
+  opacity: 0.25;
+  color: var(--txt-clr);
+  z-index: -1;
+  transform: rotateX(-40deg) scaleX(123%); /* magic numbers */
 }
 
 .layered-text p.shadow::after {
-	content: "";
-	position: absolute;
-	top: 100%;
-	left: -50%;
-	width: 200%;
-	height: 150%;
-	background: linear-gradient(to bottom, transparent, var(--bg-clr) 85%);
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -50%;
+  width: 200%;
+  height: 150%;
+  background: linear-gradient(to bottom, transparent, var(--bg-clr) 85%);
 }
 
 /* Mobile View */
 @media (max-width: 1176px) {
-    .layered-text p {
-        left: 3vh; /* Ensure the text is visible */
-        top: -20vh;  /* Adjust positioning using viewport height */
-        font-size: 2rem; /* Adjust font size for mobile */
-    }
+  .layered-text p {
+    left: 3vh; /* Ensure the text is visible */
+    top: -20vh; /* Adjust positioning using viewport height */
+    font-size: 2rem; /* Adjust font size for mobile */
+  }
 
-    .layered-text p.shadow {
-        font-size: 3rem; /* Smaller font size for mobile */
-        left: 0;
-        top: -18vh; /* Adjust shadow position with a smaller value */
-    }
+  .layered-text p.shadow {
+    font-size: 3rem; /* Smaller font size for mobile */
+    left: 0;
+    top: -18vh; /* Adjust shadow position with a smaller value */
+  }
 }
 
 @media (max-width: 768px) {
-    .layered-text p {
-        left: 0; /* Ensure the text is visible */
-        top: -20vh;  /* Adjust positioning for smaller screens */
-        font-size: 1.2rem; /* Further reduce font size for smaller mobile screens */
-    }
+  .layered-text p {
+    left: 0; /* Ensure the text is visible */
+    top: -20vh; /* Adjust positioning for smaller screens */
+    font-size: 1.2rem; /* Further reduce font size for smaller mobile screens */
+  }
 
-    .layered-text p.shadow {
-        font-size: 2rem; /* Smaller font size for mobile */
-        left: -1vh;
-        top: -18vh; /* Move the shadow upwards with a smaller value */
-    }
+  .layered-text p.shadow {
+    font-size: 2rem; /* Smaller font size for mobile */
+    left: -1vh;
+    top: -18vh; /* Move the shadow upwards with a smaller value */
+  }
 }
 
-.box-canvas{
-    position: relative;
-    margin: auto;
-    display: block;
-    margin-top: 8%;
-    margin-bottom: 8%;
-    width: 600px;
-    height:600px;
-    justify-content: flex-end;
+.box-canvas {
+  position: relative;
+  margin: auto;
+  display: block;
+  margin-top: 8%;
+  margin-bottom: 8%;
+  width: 600px;
+  height: 600px;
+  justify-content: flex-end;
+}
 
-  }
-  
-  /* Main machine body */
+/* Main machine body */
 /* Main machine body */
 .machine {
-    position: absolute;
-    left: 550px; /* Increased value to move it to the right */
-    top: -5vh;
-    width: 300px;
-    height: 400px;
-    background: var(--machine-white);
-    border-radius: 5%;
+  position: absolute;
+  left: 550px; /* Increased value to move it to the right */
+  top: -5vh;
+  width: 300px;
+  height: 400px;
+  background: var(--machine-white);
+  border-radius: 5%;
 }
 
-  
-  /* Powder drawer */
-  .drawer {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    width: 100px;
-    height: 50px;
-    border: 2px solid var(--machine-feature-gray);
-    border-radius: 0 0 20% 0;
+/* Powder drawer */
+.drawer {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100px;
+  height: 50px;
+  border: 2px solid var(--machine-feature-gray);
+  border-radius: 0 0 20% 0;
+}
+
+/* Drawer handle */
+.drawer::after {
+  content: "";
+  position: absolute;
+  width: 70px;
+  height: 15px;
+  background: var(--machine-feature-gray);
+  bottom: 5px;
+  right: 5px;
+  border-radius: 0 0 30% 0;
+}
+
+/* Small LED display */
+.panel {
+  position: absolute;
+  width: 40px;
+  height: 15px;
+  background: var(--darkest-gray);
+  left: 150px;
+  top: 30px;
+}
+
+/* Light indicator in panel */
+.panel::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 10px;
+  background: var(--accent-green);
+  right: 5px;
+  top: 2px;
+}
+
+/* Machine dial */
+.panel::after {
+  content: "";
+  position: absolute;
+  left: 80px;
+  top: -10px;
+  width: 35px;
+  height: 35px;
+  border: 2px solid var(--machine-feature-gray);
+  border-radius: 50%;
+}
+
+/* Center of washer door, width border forming the frame */
+.door {
+  position: absolute;
+  background: var(--machine-white);
+  left: 60px;
+  bottom: 90px;
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  border: 5px solid var(--machine-feature-gray);
+  overflow: hidden;
+}
+
+/* Reflection on door surface */
+.door::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(transparent 30%, white);
+}
+
+/* Washing machine drum */
+.drum {
+  position: absolute;
+  left: 25px;
+  top: 25px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--darkest-gray);
+  overflow: hidden;
+  animation: drumRotate 2s infinite;
+}
+
+/* Clothes inside machine */
+.drum::before {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 50px;
+  background: var(--accent-green);
+  border-radius: 40%;
+  bottom: 0;
+}
+
+@keyframes drumRotate {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  /* Drawer handle */
-  .drawer::after {
-    content: '';
-    position: absolute;
-    width: 70px;
-    height: 15px;
-    background: var(--machine-feature-gray);
-    bottom: 5px;
-    right: 5px;
-    border-radius: 0 0 30% 0;
+
+  100% {
+    transform: rotate(360deg);
   }
-  
-  /* Small LED display */
-  .panel {
-    position: absolute;
+}
+@media (max-width: 1176px) {
+  .box-canvas {
+    display: none;
+  }
+}
+
+@keyframes bubbleFloat {
+  0% {
+    transform: translateY(100vh) scale(0.8);
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-10vh) scale(1.2);
+    opacity: 0;
+  }
+}
+
+.bubble-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1; /* Ensure bubbles stay behind content */
+}
+
+.bubble {
+  position: absolute;
+  background: var(--bubble-color);
+  border-radius: 50%;
+  animation: bubbleFloat 8s infinite linear;
+}
+
+/* Randomizing bubbles */
+.bubble:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 10%;
+  animation-duration: 6s;
+}
+.bubble:nth-child(2) {
+  width: 10px;
+  height: 10px;
+  left: 30%;
+  animation-duration: 9s;
+}
+.bubble:nth-child(3) {
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  animation-duration: 5s;
+}
+.bubble:nth-child(4) {
+  width: 50px;
+  height: 50px;
+  left: 70%;
+  animation-duration: 7s;
+}
+.bubble:nth-child(5) {
+  width: 40px;
+  height: 40px;
+  left: 90%;
+  animation-duration: 8s;
+}
+
+@media (max-width: 768px) {
+  .bubble:nth-child(1) {
+    width: 30px;
+    height: 30px;
+  }
+  .bubble:nth-child(2) {
     width: 40px;
-    height: 15px;
-    background: var(--darkest-gray);
-    left: 150px;
-    top: 30px;
+    height: 40px;
   }
-  
-  /* Light indicator in panel */
-  .panel::before {
-    content: '';
-    position: absolute;
-    width: 8px;
-    height: 10px;
-    background: var(--accent-green);
-    right: 5px;
-    top: 2px;
-  }
-  
-  /* Machine dial */
-  .panel::after {
-    content: '';
-    position: absolute;
-    left: 80px;
-    top: -10px;
-    width: 35px;
-    height: 35px;
-    border: 2px solid var(--machine-feature-gray);
-    border-radius: 50%;
-  }
-  
-  /* Center of washer door, width border forming the frame */
-  .door {
-    position: absolute;
-    background: var(--machine-white);
-    left: 60px;
-    bottom: 90px;
-    width: 170px;
-    height: 170px;
-    border-radius: 50%;
-    border: 5px solid var(--machine-feature-gray);
-    overflow: hidden;
-  }
-  
-  /* Reflection on door surface */
-  .door::after {
-    content: '';
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    width: 160px;
-    height: 160px;
-    background: radial-gradient(transparent 30%, white);
-  }
-  
-  /* Washing machine drum */
-  .drum {
-    position: absolute;
-    left: 25px;
-    top: 25px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: var(--darkest-gray);
-    overflow: hidden;
-    animation: drumRotate 2s infinite;
-  }
-  
-  /* Clothes inside machine */
-  .drum::before {
-    content: '';
-    position: absolute;
-    width: 80px;
-    height: 50px;
-    background: var(--accent-green);
-    border-radius: 40%;
-    bottom: 0;
-  }
-  
-  
-  
-  @keyframes drumRotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-  @media (max-width: 1176px){
-    .box-canvas{
-        display: none;
-    }
+}
+
+.bubble {
+  position: absolute;
+  background: var(--bubble-color);
+  border-radius: 50%;
+  animation: bubbleFloat 6s infinite linear;
+}
+
+.bubble:nth-child(1) {
+  width: 40px;
+  height: 40px;
+  left: 20%;
+  animation-duration: 5s;
+}
+
+.bubble:nth-child(2) {
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  animation-duration: 7s;
+}
+
+.bubble:nth-child(3) {
+  width: 30px;
+  height: 30px;
+  left: 80%;
+  animation-duration: 4s;
+}
+
+@media (max-width: 1176px) {
+  .layered-text p {
+    left: 3vh;
+    top: -20vh;
+    font-size: 2rem;
   }
 
-
-  .swiper {
-    width: 100%;
-    height: 100%;
+  .bubble:nth-child(1) {
+    width: 30px;
+    height: 30px;
   }
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .layered-text p {
+    left: 0;
+    top: -20vh;
+    font-size: 1.2rem;
+  }
+
+  .bubble:nth-child(2) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin-top: 20px;
+}
+
+.calendar-section {
+  flex: 1;
+  text-align: center;
+  padding: 20px;
+  background: var(--bg-clr);
+  border-radius: 15px;
+  max-width: 400px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out;
+}
+
+.calendar-section:hover {
+  transform: scale(1.03);
+}
+
+.calendar-info {
+  flex: 1;
+  max-width: 400px;
+  text-align: left;
+}
+
+.calendar-info h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--txt-clr);
+  margin-bottom: 10px;
+}
+
+.calendar-info p {
+  font-size: 1.2rem;
+  color: var(--darkest-gray);
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .calendar-container {
+    flex-direction: column;
     align-items: center;
   }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+  .calendar-section,
+  .calendar-info {
+    max-width: 90%;
+    text-align: center;
   }
-  
-  .swiper {
-    width: 100%;
-    height: 300px;
-    margin-left: auto;
-    margin-right: auto;
+
+  .calendar-info p {
+    font-size: 1rem;
   }
-  
-  .swiper-slide {
-    background-size: cover;
-    background-position: center;
-  }
-  
-  .mySwiper2 {
-    height: 80%;
-    width: 100%;
-  }
-  
-  .mySwiper {
-    height: 20%;
-    box-sizing: border-box;
-    padding: 10px 0;
-  }
-  
-  .mySwiper .swiper-slide {
-    width: 25%;
-    height: 100%;
-    opacity: 0.4;
-  }
-  
-  .mySwiper .swiper-slide-thumb-active {
-    opacity: 1;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
+}
