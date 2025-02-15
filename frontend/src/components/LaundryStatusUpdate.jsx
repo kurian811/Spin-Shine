@@ -53,19 +53,21 @@ function LaundryStatusUpdate() {
 
       if (response.status === 200) {
         // Update the state without refetching the data
-        setLaundryRecords((prevRecords) =>
-          prevRecords.map((record) =>
+        setLaundryRecords((prevRecords) => {
+          const updatedRecords = prevRecords.map((record) =>
             record._id === recordId
-              ? {
-                  ...record,
-                  status: newStatus,
-                  pushMessageSent:
-                    newStatus === "Completed" ? false : record.pushMessageSent,
-                }
+              ? { ...record, status: newStatus, pushMessageSent: newStatus === "Completed" ? false : record.pushMessageSent }
               : record
-          )
-        );
-        handleFilterChange(filter);
+          );
+        
+          // Update filtered records as well
+          setFilteredRecords(
+            filter === "All" ? updatedRecords : updatedRecords.filter((r) => r.status === filter)
+          );
+        
+          return updatedRecords;
+        });
+        
         swal("Success", "Laundry status updated successfully!", "success");
       }
     } catch (error) {

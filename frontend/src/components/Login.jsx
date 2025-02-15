@@ -27,7 +27,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Validate email before sending request
+    // Validate email b efore sending request
     if (!validateEmail(formData.email)) {
       setErrorMessage("Invalid email format. Please enter a valid email.");
       setTimeout(() => setErrorMessage(""), 5000);

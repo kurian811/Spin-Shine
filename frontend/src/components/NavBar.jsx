@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import axios from "axios";
 import logo from "../assets/logo.png";
 import "../styles/NavBar.css";
-import { Link, NavLink, useNavigate } from "react-router-dom";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import axios from "axios";
 
 const NavBar = ({ onToggleMenu }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
   const [notifications, setNotifications] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -16,16 +16,20 @@ const NavBar = ({ onToggleMenu }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      setIsLoggedIn(true);
-    }
+    const handleStorageChange = () => {
+      setIsLoggedIn(!!localStorage.getItem("token"));
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+    };
   }, []);
 
   useEffect(() => {
     const fetchNotifications = async () => {
       const storedUser = JSON.parse(localStorage.getItem("user"));
-      const userId = storedUser ? storedUser.id : null;
+      const userId = storedUser?.id || storedUser?._id;
 
       if (userId) {
         setLoading(true);
@@ -34,7 +38,6 @@ const NavBar = ({ onToggleMenu }) => {
             `http://localhost:3000/api/notifications/user/${userId}`
           );
           setNotifications(response.data);
-          setError(null);
         } catch (err) {
           console.error("Error fetching notifications:", err);
           setError("Failed to load notifications");
@@ -82,38 +85,38 @@ const NavBar = ({ onToggleMenu }) => {
   const markAsRead = async () => {
     try {
       const storedUser = JSON.parse(localStorage.getItem("user"));
-      const userId = storedUser ? storedUser.id : null;
-  
+      const userId = storedUser?.id || storedUser?._id;
+
       if (!userId) {
         console.error("User ID is missing. Cannot mark notifications as read.");
         return;
       }
-  
-      const response = await axios.put(
-        `http://localhost:3000/api/notifications/markAsRead/${userId}`
+
+      await axios.put(`http://localhost:3000/api/notifications/markAsRead/${userId}`);
+
+      setNotifications((prevNotifications) =>
+        prevNotifications.map((notification) => ({ ...notification, isRead: true }))
       );
-  
-      console.log(response.data.message); // Log the server response
     } catch (err) {
       console.error("Error marking notifications as read:", err);
     }
   };
-  
+
   const deleteRead = async () => {
     try {
       const storedUser = JSON.parse(localStorage.getItem("user"));
-      const userId = storedUser ? storedUser.id : null;
-  
+      const userId = storedUser?.id || storedUser?._id;
+
       if (!userId) {
         console.error("User ID is missing. Cannot delete read notifications.");
         return;
       }
-  
-      const response = await axios.delete(
-        `http://localhost:3000/api/notifications/deleteRead/${userId}`
+
+      await axios.delete(`http://localhost:3000/api/notifications/deleteRead/${userId}`);
+
+      setNotifications((prevNotifications) =>
+        prevNotifications.filter((notification) => !notification.isRead)
       );
-  
-      console.log(response.data.message); // Log the server response
     } catch (err) {
       console.error("Error deleting read notifications:", err);
     }
@@ -127,11 +130,10 @@ const NavBar = ({ onToggleMenu }) => {
     setError(null);
     setLoading(false);
     navigate("/Login");
+    window.dispatchEvent(new Event("storage")); // Force Navbar to update
   };
 
-  const hasUnreadNotifications = notifications.some(
-    (notification) => !notification.isRead
-  );
+  const hasUnreadNotifications = notifications.some((notification) => !notification.isRead);
 
   return (
     <div className={`navbar-container ${isMenuOpen ? "menu-open" : ""}`}>
@@ -140,121 +142,79 @@ const NavBar = ({ onToggleMenu }) => {
           <img src={logo} alt="Logo" className="nav-logo" />
         </Link>
         <button className="menu-toggle" onClick={toggleMenu}>
-          <i
-            className={isMenuOpen ? "bi bi-x" : "bi bi-list"}
-            style={{ color: "#00b4d8" }}
-          ></i>
+          <i className={isMenuOpen ? "bi bi-x" : "bi bi-list"} style={{ color: "#00b4d8" }}></i>
         </button>
       </div>
 
       <nav className={`nav-menu ${isMenuOpen ? "active" : ""}`}>
         <ul>
           <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "nav-links active" : "nav-links"
-              }
-            >
+            <NavLink to="/" className={({ isActive }) => (isActive ? "nav-links active" : "nav-links")}>
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/Contact"
-              className={({ isActive }) =>
-                isActive ? "nav-links active" : "nav-links"
-              }
-            >
+            <NavLink to="/Contact" className={({ isActive }) => (isActive ? "nav-links active" : "nav-links")}>
               Contact
             </NavLink>
           </li>
 
           {!isLoggedIn ? (
             <li>
-              <NavLink
-                to="/Login"
-                className={({ isActive }) =>
-                  isActive ? "nav-links active" : "nav-links"
-                }
-              >
+              <NavLink to="/Login" className={({ isActive }) => (isActive ? "nav-links active" : "nav-links")}>
                 Login
               </NavLink>
             </li>
           ) : (
             <li>
-              <NavLink
-                to="/Choose"
-                className={({ isActive }) =>
-                  isActive ? "nav-links active" : "nav-links"
-                }
-              >
+              <NavLink to="/Choose" className={({ isActive }) => (isActive ? "nav-links active" : "nav-links")}>
                 Submit Laundry
               </NavLink>
             </li>
           )}
 
-          <li>
-            <div className="navbar-icons">
-              <div
-                className="notification-bell"
-                ref={dropdownRef}
-                onClick={toggleDropdown}
-              >
-                <i className="bi bi-bell"></i>
-                {hasUnreadNotifications && (
-                  <span className="notification-dot"></span>
-                )}
-                {isDropdownOpen && (
-                  <div className="dropdown-menu">
-                    {loading ? (
-                      <p>Loading notifications...</p>
-                    ) : error ? (
-                      <p>{error}</p>
-                    ) : notifications.length === 0 ? (
-                      <p>No new notifications</p>
-                    ) : (
-                      <ul className="notification-class">
-                        {notifications.map((notification) => (
-                          <li
-                            key={notification._id}
-                            className={`notification-item ${
-                              notification.isRead ? "read" : "unread"
-                            }`}
-                          >
-                            <p className="notification-message">{notification.message}</p>
-                            <small>
-                              {new Date(notification.createdAt).toLocaleString()}
-                            </small>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    <div className="dropdown-actions">
-                      <button
-                        className="dropdown-action-button"
-                        onClick={markAsRead}
-                        disabled={notifications.every((n) => n.isRead)}
-                      >
-                        Mark All as Read
-                      </button>
-                      <button
-                        className="dropdown-action-button"
-                        onClick={deleteRead}
-                        disabled={notifications.every((n) => !n.isRead)}
-                      >
-                        Delete Read
-                      </button>
+          {isLoggedIn && (
+            <li>
+              <div className="navbar-icons">
+                <div className="notification-bell" ref={dropdownRef} onClick={toggleDropdown}>
+                  <i className="bi bi-bell"></i>
+                  {hasUnreadNotifications && <span className="notification-dot"></span>}
+                  {isDropdownOpen && (
+                    <div className="dropdown-menu">
+                      {loading ? (
+                        <p>Loading notifications...</p>
+                      ) : error ? (
+                        <p>{error}</p>
+                      ) : notifications.length === 0 ? (
+                        <p>No new notifications</p>
+                      ) : (
+                        <ul className="notification-class">
+                          {notifications.map((notification) => (
+                            <li key={notification._id} className={`notification-item ${notification.isRead ? "read" : "unread"}`}>
+                              <p className="notification-message">{notification.message}</p>
+                              <small>{new Date(notification.createdAt).toLocaleString()}</small>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      <div className="dropdown-actions">
+                        <button className="dropdown-action-button" onClick={markAsRead} disabled={notifications.every((n) => n.isRead)}>
+                          Mark All as Read
+                        </button>
+                        <button className="dropdown-action-button" onClick={deleteRead} disabled={notifications.every((n) => !n.isRead)}>
+                          Delete Read
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                )}
-              </div>
+                  )}
+                </div>
 
-              <Link to="/Profile">
-                <i className="bi bi-person"></i>
-              </Link>
-            </div>
-          </li>
+                <Link to="/Profile">
+                  <i className="bi bi-person"></i>
+                </Link>
+              </div>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
