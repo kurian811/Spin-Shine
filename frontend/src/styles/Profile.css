@@ -1,111 +1,153 @@
-/* General profile container styles */
+/* Profile Container */
 .profile-container {
   max-width: 600px;
-  margin: 20px auto;
-  padding: 20px;
-  background-color: transparent;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
+/* Profile Heading */
 .profile-heading {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: 1.75rem;
+  color: #1a1a1a;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  border-bottom: 2px solid #f0f0f0;
+  padding-bottom: 1rem;
 }
 
-/* Profile information section */
+/* Profile Information */
 .profile-info p {
-  font-size: 1rem;
-  margin-bottom: 10px;
-  color: #555;
-}
-
-.edit-btn, .change-password-btn, .save-btn, .cancel-btn, .logout-btn {
-  display: inline-block;
-  padding: 10px 20px;
-  margin-top: 10px;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.edit-btn, .change-password-btn {
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  margin-right: 10px;
-}
-
-.save-btn {
-  background-color: #007BFF;
-  color: white;
-  border: none;
-}
-
-.cancel-btn {
-  background-color: #f44336;
-  color: white;
-  border: none;
-}
-
-.logout-btn {
-  background-color: #333;
-  color: white;
-  border: none;
-  margin-top: 20px;
-  width: 100%;
-}
-
-.edit-btn:hover, .change-password-btn:hover, .save-btn:hover, .cancel-btn:hover, .logout-btn:hover {
-  opacity: 0.8;
-}
-
-/* Edit form styling */
-.edit-form, .password-form {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.edit-form label, .password-form label {
-  display: block;
-  font-size: 1rem;
-  margin-bottom: 10px;
+  margin: 1rem 0;
+  padding: 0.75rem 0;
   color: #333;
+  display: flex;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.profile-info p:last-child {
+  border-bottom: none;
+}
+
+/* Form Styles */
+.edit-form, .password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: #4a4a4a;
+  font-weight: 500;
 }
 
 .input-field {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  padding: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
   font-size: 1rem;
-  color: #333;
+  transition: border-color 0.2s ease;
 }
 
 .input-field:focus {
-  border-color: #007BFF;
   outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
 }
 
-/* Error message styling */
+/* Button Styles */
+.edit-btn,
+.save-btn,
+.cancel-btn,
+.change-password-btn,
+.logout-btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: none;
+}
+
+.edit-btn {
+  background-color: #f8f9fa;
+  color: #2563eb;
+  border: 1px solid #2563eb;
+  margin-right: 1rem;
+}
+
+.edit-btn:hover {
+  background-color: #2563eb;
+  color: white;
+}
+
+.save-btn {
+  background-color: #2563eb;
+  color: white;
+  margin-right: 1rem;
+}
+
+.save-btn:hover {
+  background-color: #1d4ed8;
+}
+
+.cancel-btn {
+  background-color: #f8f9fa;
+  color: #666;
+  border: 1px solid #ddd;
+}
+
+.cancel-btn:hover {
+  background-color: #e9ecef;
+}
+
+.change-password-btn {
+  background-color: #f8f9fa;
+  color: #4a4a4a;
+  border: 1px solid #ddd;
+}
+
+.change-password-btn:hover {
+  background-color: #e9ecef;
+}
+
+.logout-btn {
+  background-color: #f8f9fa;
+  color: #dc2626;
+  border: 1px solid #dc2626;
+  margin-top: 2rem;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+  color: white;
+}
+
+/* Error Message */
 .error-message {
-  color: #f44336;
-  font-size: 1rem;
-  margin-bottom: 15px;
+  color: #dc2626;
+  font-size: 0.875rem;
+  margin: 0.5rem 0;
 }
 
-/* Button styles for better appearance */
-button:focus {
-  outline: none;
+/* Responsive Design */
+@media (max-width: 640px) {
+  .profile-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .edit-btn,
+  .save-btn,
+  .cancel-btn,
+  .change-password-btn,
+  .logout-btn {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
 }
-
-button {
-  transition: background-color 0.3s ease;
-}
-
