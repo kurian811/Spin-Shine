@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "../styles/Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Eye, EyeOff } from "lucide-react";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,6 +11,8 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showToast, setShowToast] = useState(false);
 
   // Handle input change
   const handleChange = (e) => {
@@ -23,18 +26,38 @@ const Login = () => {
     return emailRegex.test(email);
   };
 
+  // Password validation
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
+  // Show toast message
+  const showToastMessage = (message) => {
+    setErrorMessage(message);
+    setShowToast(true);
+    setTimeout(() => {
+      setShowToast(false);
+      setErrorMessage("");
+    }, 5000);
+  };
+
   // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Validate email b efore sending request
+    // Validate email before sending request
     if (!validateEmail(formData.email)) {
-      setErrorMessage("Invalid email format. Please enter a valid email.");
-      setTimeout(() => setErrorMessage(""), 5000);
+      showToastMessage("Invalid email format. Please enter a valid email.");
       return;
     }
 
-    setLoading(true); // Start loading spinner
+    // Validate password
+    if (!validatePassword(formData.password)) {
+      showToastMessage("Password must be at least 8 characters long.");
+      return;
+    }
+
+    setLoading(true);
 
     try {
       const response = await fetch("http://localhost:3000/api/users/login", {
@@ -57,17 +80,19 @@ const Login = () => {
           if (user.role === "admin") {
             navigate("/AdminDashboard");
           } else {
-            navigate("/"); // Home page for non-admin
+            navigate("/");
           }
         } else {
-          setErrorMessage("Unexpected response structure.");
+          showToastMessage("Unexpected response structure.");
         }
+      } else {
+        showToastMessage(data.message || "Invalid credentials. Please try again.");
       }
     } catch (err) {
       console.error("Login error:", err);
-      setErrorMessage("An error occurred. Please try again later.");
+      showToastMessage("An error occurred. Please try again later.");
     } finally {
-      setLoading(false); // Stop loading spinner
+      setLoading(false);
     }
   };
 
@@ -104,31 +129,48 @@ const Login = () => {
                 onChange={handleChange}
                 required
               />
-              <input
-                type="password"
-                name="password"
-                placeholder="Password"
-                value={formData.password}
-                onChange={handleChange}
-                minLength="8"
-                maxLength="20"
-                required
-              />
-
+              <PasswordInputWrapper>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  name="password"
+                  placeholder="Password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  minLength="8"
+                  maxLength="20"
+                  required
+                />
+                <PasswordToggle
+                  onClick={() => setShowPassword(!showPassword)}
+                  type="button"
+                >
+                  {showPassword ? (
+                    <EyeOff size={20} />
+                  ) : (
+                    <Eye size={20} />
+                  )}
+                </PasswordToggle>
+              </PasswordInputWrapper>
             </div>
             <button className="login-btn" disabled={loading}>
               {loading ? "Logging in..." : "Log in"}
             </button>
             <StyledForgotPassword>
-                <Link to="/forgot-password">Forgot password?</Link>
-              </StyledForgotPassword>
+              <Link to="/forgot-password">Forgot password?</Link>
+            </StyledForgotPassword>
           </form>
           {loading && (
             <div className="loading-container">
               <div className="spinner"></div>
             </div>
           )}
-          {errorMessage && <p className="error-message">{errorMessage}</p>}
+          {showToast && (
+            <StyledToast>
+              <div className="toast-content">
+                <span>{errorMessage}</span>
+              </div>
+            </StyledToast>
+          )}
           <div className="login-form-footer">
             <p>
               Don't have an account? <Link to="/Signup">Sign up</Link>
@@ -139,6 +181,65 @@ const Login = () => {
     </div>
   );
 };
+
+const PasswordInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+
+  input {
+    width: 100%;
+    padding-right: 40px;
+  }
+`;
+
+const PasswordToggle = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #666;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    color: #333;
+  }
+`;
+
+const StyledToast = styled.div`
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  max-width: 400px;
+  width: 90%;
+
+  .toast-content {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    margin-bottom: 8px;
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+`;
 
 const StyledWrapper = styled.div`
   position: absolute;
