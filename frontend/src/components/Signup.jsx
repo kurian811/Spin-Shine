@@ -87,32 +87,39 @@ const Signup = () => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!formData.fullName || !formData.email || !formData.password || !formData.confirmPassword || !formData.phone) {
+  
+    // Validate required fields
+    if (Object.values(formData).some((value) => !value)) {
       setServerMessage("Please fill in all fields.");
       return;
     }
-
+  
     if (formData.password !== formData.confirmPassword) {
       setValidationMessage("Passwords do not match.");
       return;
     }
-
-    const phoneValidationMessage = validatePhoneNumber(formData.phone);
-    if (phoneValidationMessage) {
-      setValidationMessage(phoneValidationMessage);
-      return;
-    }
-
+  
     try {
+      console.log("Sending data:", formData);
+  
       const response = await fetch("http://localhost:3000/api/users/register", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          roomNumber: formData.roomNumber,
+          laundryId: formData.laundryId,
+          phone: formData.phone,
+        }),
       });
-
+  
       const data = await response.json();
-
+      console.log("Response data:", data);
+  
       if (response.ok) {
         setServerMessage("Signup successful! Redirecting...");
         setTimeout(() => navigate("/Login"), 2000);
@@ -124,6 +131,7 @@ const Signup = () => {
       setServerMessage("An error occurred. Please try again later.");
     }
   };
+  
 
   return (
     <div className="signup-body">

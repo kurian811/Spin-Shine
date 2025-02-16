@@ -56,6 +56,11 @@ const registerUser = async (req, res) => {
   } catch (err) {
     console.error('Error registering user:', err);
 
+    // Handle MongoDB duplicate key error (E11000)
+    if (err.code === 11000 && err.keyPattern?.email) {
+      return res.status(400).json({ message: 'Email already exists!' });
+    }
+
     if (err.name === 'ValidationError') {
       return res.status(400).json({ message: 'Validation error', errors: err.errors });
     }
@@ -63,6 +68,7 @@ const registerUser = async (req, res) => {
     res.status(500).json({ message: 'Error registering user', error: err.message });
   }
 };
+
 
 // Controller for user login
 const loginUser = async (req, res) => {
